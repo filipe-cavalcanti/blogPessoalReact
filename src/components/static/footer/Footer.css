@@ -1,0 +1,22 @@
+.box1 {
+    height: 120px;
+    background-color: #7d1919;
+}
+
+.box2 {
+    height: 60px;
+    background-color: #7d1919;
+}
+
+.redes {
+    font-size: 60px !important;
+    color: #ffffff;
+}
+
+.textosFooter {
+    color: #ffffff;
+}
+
+.text-decorator-none {
+    text-decoration: none !important;
+}

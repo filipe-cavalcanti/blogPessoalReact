@@ -1,0 +1,12 @@
+.box {
+    background-color: #7d1919 !important;
+}
+
+.cursor {
+    color: #ffffff;
+    cursor: pointer;
+}
+
+.text-decorator-none {
+    text-decoration: none;
+}
