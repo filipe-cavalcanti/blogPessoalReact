@@ -1,0 +1,24 @@
+.textosCadastroUsuario {
+    font-weight: bold !important;
+}
+
+.botaoCancelar {
+    margin-right: 20px !important;
+}
+
+.botaoCadastroUsuario {
+    background-color: #7d1919 !important;
+}
+
+.imagemCadastroUsuario {
+    width: 100vh;
+    min-height: 100vh;
+    background-image: url(https://i.imgur.com/d5bMdDJ.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+}
+
+.text-decorator-none {
+    text-decoration: none;
+}
