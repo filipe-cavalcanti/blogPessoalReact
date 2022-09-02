@@ -48,11 +48,13 @@ function CadastroUsuario() {
   }
   async function onSubmit(e: ChangeEvent<HTMLFormElement>) {
     e.preventDefault()
-    if (confirmarSenha == user.senha) {
+    if (confirmarSenha == user.senha && user.senha.length >= 8) {
       cadastroUsuario(`/usuarios/cadastrar`, user, setUserResult)
       alert('Usuario cadastrado com sucesso')
     } else {
       alert('Dados inconsistentes. Favor verificar as informações de cadastro.')
+      setUser({ ...user, senha: '' })
+      setConfirmarSenha('')
     }
   }
 
@@ -64,10 +66,10 @@ function CadastroUsuario() {
           <form onSubmit={onSubmit}>
             <Typography variant='h3' gutterBottom color={'textPrimary'} component='h3' align='center' className='textosCadastroUsuario'>Cadastrar</Typography>
             <TextField value={user.nome} onChange={(e: ChangeEvent<HTMLInputElement>) => updatedModel(e)} id='nome' label='nome' variant='outlined' name='nome' margin='normal' fullWidth />
-            <TextField value={user.usuario} onChange={(e: ChangeEvent<HTMLInputElement>) => updatedModel(e)} id='usuario' label='usuario' variant='outlined' name='usuario' margin='normal' fullWidth />
+            <TextField value={user.usuario} onChange={(e: ChangeEvent<HTMLInputElement>) => updatedModel(e)} id='usuario' label='e-mail' variant='outlined' name='usuario' margin='normal' fullWidth type='email' />
             <TextField value={user.senha} onChange={(e: ChangeEvent<HTMLInputElement>) => updatedModel(e)} id='senha' label='senha' variant='outlined' name='senha' margin='normal' fullWidth type='password' />
             <TextField value={confirmarSenha} onChange={(e: ChangeEvent<HTMLInputElement>) => confirmarSenhaHandle(e)} id='confirmarSenha' label='confirmarSenha' variant='outlined' name='confirmarSenha' margin='normal' fullWidth type='password' />
-            <TextField value={user.foto} onChange={(e: ChangeEvent<HTMLInputElement>) => updatedModel(e)} id='foto' label='url foto' variant='outlined' name='foto' margin='normal' fullWidth />
+            <TextField value={user.foto} onChange={(e: ChangeEvent<HTMLInputElement>) => updatedModel(e)} id='foto' label='url da foto' variant='outlined' name='foto' margin='normal' fullWidth type='url' />
             <Box marginTop={2} textAlign='center'>
               <Link to='/login' className='text-decorator-none'>
                 <Button variant='contained' className='botaoCancelar'>
