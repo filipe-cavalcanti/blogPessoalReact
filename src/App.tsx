@@ -1,13 +1,17 @@
 import React from 'react';
 import './App.css';
-import Navbar from './components/static/navbar/Navbar';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Login from './pages/login/Login';
 import CadastroUsuario from './pages/cadastroUsuario/CadastroUsuario';
+import Navbar from './components/static/navbar/Navbar';
 import Home from './pages/home/Home';
-import ListaTema from './components/temas/listaTema/ListaTema';
+import CadastroPostagem from './components/postagens/CadastroPostagem/CadastroPostagem';
+import DeletarPostagem from './components/postagens/deletarPostagem/DeletarPostagem';
 import ListaPostagem from './components/postagens/listaPostagens/ListaPostagem';
+import CadastroTema from './components/temas/cadastroTema/CadastroTema';
+import DeletarTema from './components/temas/deletarTema/DeletarTema';
+import ListaTema from './components/temas/listaTema/ListaTema';
 import Footer from './components/static/footer/Footer';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
 function App() {
   return (
@@ -21,6 +25,15 @@ function App() {
           <Route path="/home" element={<Home />} />
           <Route path="/temas" element={<ListaTema />} />
           <Route path="/postagens" element={<ListaPostagem />} />
+
+          <Route path="/formularioTema" element={<CadastroTema />} />
+          <Route path="/formularioTema/:id" element={<CadastroTema />} />
+
+          <Route path="/formularioPostagem" element={<CadastroPostagem />} />
+          <Route path="/formularioPostagem/:id" element={<CadastroPostagem />} />
+
+          <Route path="/deletarPostagem/:id" element={<DeletarPostagem />} />
+          <Route path="/deletarTema/:id" element={<DeletarTema />} />
         </Routes>
       </div>
       <Footer />
