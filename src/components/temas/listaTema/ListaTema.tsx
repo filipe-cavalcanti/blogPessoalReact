@@ -1,20 +1,23 @@
 import React, { useEffect, useState } from 'react'
 import './ListaTema.css'
-import { Box } from '@mui/material';
-import { Button, Card, CardActions, CardContent, Typography } from '@material-ui/core';
-import { Link, useNavigate } from 'react-router-dom';
-import useLocalStorage from 'react-use-localstorage';
-import Tema from '../../../models/Tema';
-import { busca } from '../../../services/Service';
+import { Box } from '@mui/material'
+import { Button, Card, CardActions, CardContent, Typography } from '@material-ui/core'
+import { Link, useNavigate } from 'react-router-dom'
+import Tema from '../../../models/Tema'
+import { busca } from '../../../services/Service'
+import { useSelector } from 'react-redux'
+import { TokenState } from '../../../store/tokens/tokensReducer'
 
 function ListaTema() {
 
-    const [temas, setTemas] = useState<Tema[]>([])
-    const [token, setToken] = useLocalStorage('token')
     let navigate = useNavigate()
+    const [temas, setTemas] = useState<Tema[]>([])
+    const token = useSelector<TokenState, TokenState['tokens']>(
+        (state) => state.tokens
+    )
 
     useEffect(() => {
-        if (token == '') {
+        if (token === '') {
             alert('Você precisa estar logado!')
             navigate('/login')
         }
@@ -22,8 +25,8 @@ function ListaTema() {
 
     async function getTema() {
         await busca('/temas', setTemas, {
-            headers: { 
-                'Authorization': token 
+            headers: {
+                'Authorization': token
             }
         })
     }
@@ -36,7 +39,7 @@ function ListaTema() {
         <>
             {
                 temas.map(tema => (
-                    <Box m={2} >
+                    <Box m={2} key={tema.id}>
                         <Card variant='outlined'>
                             <CardContent>
                                 <Typography color='textSecondary' gutterBottom>

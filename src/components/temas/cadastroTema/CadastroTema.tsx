@@ -1,34 +1,30 @@
 import React, { ChangeEvent, useEffect, useState } from 'react'
 import './CadastroTema.css'
-import { useNavigate, useParams } from 'react-router-dom';
-import useLocalStorage from 'react-use-localstorage';
-import Tema from '../../../models/Tema';
-import { buscaId, post, put } from '../../../services/Service';
-import { Button, Container, TextField, Typography } from '@material-ui/core';
-
+import { Button, Container, TextField, Typography } from '@material-ui/core'
+import { useNavigate, useParams } from 'react-router-dom'
+import Tema from '../../../models/Tema'
+import { buscaId, post, put } from '../../../services/Service'
+import { useSelector } from 'react-redux'
+import { TokenState } from '../../../store/tokens/tokensReducer'
 
 function CadastroTema() {
 
-    let navigate = useNavigate();
-    const { id } = useParams<{ id: string }>();
-    const [token, setToken] = useLocalStorage('token');
+    let navigate = useNavigate()
+    const { id } = useParams<{ id: string }>()
+    const token = useSelector<TokenState, TokenState['tokens']>(
+        (state) => state.tokens
+    )
     const [tema, setTema] = useState<Tema>({
         id: 0,
         descricao: ''
     })
 
     useEffect(() => {
-        if (token == '') {
+        if (token === '') {
             alert('Você precisa estar logado!')
             navigate('/login')
         }
     }, [token])
-
-    useEffect(() => {
-        if (id !== undefined) {
-            findById(id)
-        }
-    }, [id])
 
     async function findById(id: string) {
         buscaId(`/temas/${id}`, setTema, {
@@ -38,10 +34,16 @@ function CadastroTema() {
         })
     }
 
+    useEffect(() => {
+        if (id !== undefined) {
+            findById(id)
+        }
+    }, [id])
+
     function updatedTema(e: ChangeEvent<HTMLInputElement>) {
         setTema({
             ...tema,
-            [e.target.name]: e.target.value,
+            [e.target.name]: e.target.value
         })
     }
 
@@ -50,19 +52,29 @@ function CadastroTema() {
         console.log('tema ' + JSON.stringify(tema))
         if (id !== undefined) {
             console.log(tema)
-            put(`/temas`, tema, setTema, {
-                headers: {
-                    'Authorization': token
-                }
-            })
-            alert('Tema atualizado com sucesso');
+            try {
+                await put(`/temas`, tema, setTema, {
+                    headers: {
+                        'Authorization': token
+                    }
+                })
+                alert('Tema atualizado com sucesso')
+            } catch (error) {
+                console.log(`Error: ${error}`)
+                alert("Erro, por favor verifique a quantidade mínima de caracteres")
+            }
         } else {
-            post(`/temas`, tema, setTema, {
-                headers: {
-                    'Authorization': token
-                }
-            })
-            alert('Tema cadastrado com sucesso');
+            try {
+                await post(`/temas`, tema, setTema, {
+                    headers: {
+                        'Authorization': token
+                    }
+                })
+                alert('Tema cadastrado com sucesso')
+            } catch (error) {
+                console.log(`Error: ${error}`)
+                alert("Erro, por favor verifique a quantidade mínima de caracteres")
+            }
         }
         back()
     }

@@ -1,21 +1,24 @@
 import React, { ChangeEvent, useEffect, useState } from 'react'
 import './CadastroPostagem.css'
 import { Button, Container, FormControl, FormHelperText, InputLabel, MenuItem, Select, TextField, Typography } from '@material-ui/core'
-import { useNavigate, useParams } from 'react-router-dom';
-import useLocalStorage from 'react-use-localstorage';
-import Tema from '../../../models/Tema';
-import Postagem from '../../../models/Postagem';
-import { busca, buscaId, post, put } from '../../../services/Service';
+import { useNavigate, useParams } from 'react-router-dom'
+import Tema from '../../../models/Tema'
+import Postagem from '../../../models/Postagem'
+import { busca, buscaId, post, put } from '../../../services/Service'
+import { useSelector } from 'react-redux'
+import { TokenState } from '../../../store/tokens/tokensReducer'
 
 function CadastroPostagem() {
 
-    let navigate = useNavigate();
-    const { id } = useParams<{ id: string }>();
+    let navigate = useNavigate()
+    const { id } = useParams<{ id: string }>()
     const [temas, setTemas] = useState<Tema[]>([])
-    const [token, setToken] = useLocalStorage('token');
+    const token = useSelector<TokenState, TokenState['tokens']>(
+        (state) => state.tokens
+    )
 
     useEffect(() => {
-        if (token == '') {
+        if (token === '') {
             alert('Você precisa estar logado!')
             navigate('/login')
         }
@@ -30,7 +33,13 @@ function CadastroPostagem() {
         id: 0,
         titulo: '',
         texto: '',
-        tema: null
+        tema: null,
+        usuario: {
+            id: 1,
+            nome: '',
+            usuario: '',
+            senha: ''
+        }
     })
 
     useEffect(() => {
@@ -105,7 +114,7 @@ function CadastroPostagem() {
 
                 <FormControl >
                     <InputLabel id='demo-simple-select-helper-label'>Tema </InputLabel>
-                    <Select labelId='demo-simple-select-helper-label' id='demo-simple-select-helper' onChange={(e) => buscaId(`/tema/${e.target.value}`, setTema, { headers: { 'Authorization': token } })}>
+                    <Select labelId='demo-simple-select-helper-label' id='demo-simple-select-helper' onChange={(e) => buscaId(`/temas/${e.target.value}`, setTema, { headers: { 'Authorization': token } })}>
                         {temas.map(tema => (<MenuItem value={tema.id}>{tema.descricao}</MenuItem>))}
                     </Select>
                     <FormHelperText>Escolha um tema para a postagem</FormHelperText>

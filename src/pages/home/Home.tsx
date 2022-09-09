@@ -1,23 +1,24 @@
-import React, { useEffect } from 'react';
+import React, { useEffect } from 'react'
 import './Home.css'
-import { Box, Modal } from '@mui/material';
+import { Box } from '@mui/material'
 import { Button, Grid, Typography } from '@material-ui/core'
-import { useNavigate } from 'react-router-dom';
-import useLocalStorage from 'react-use-localstorage';
-import TabPostagem from '../../components/postagens/tabPostagens/TabPostagem';
-import ModalPostagem from '../../components/postagens/modalPostagem/ModalPostagem';
-
+import { Link, useNavigate } from 'react-router-dom'
+import TabPostagem from '../../components/postagens/tabPostagens/TabPostagem'
+import ModalPostagem from '../../components/postagens/modalPostagem/ModalPostagem'
+import { useSelector } from 'react-redux'
+import { TokenState } from '../../store/tokens/tokensReducer'
 
 function Home() {
 
     let navigate = useNavigate();
-    const [token, setToken] = useLocalStorage('token');
+    const token = useSelector<TokenState, TokenState['tokens']>(
+        (state) => state.tokens
+    )
 
     useEffect(() => {
-        if (token == "") {
+        if (token === "") {
             alert("Você precisa estar logado!")
             navigate("/login")
-
         }
     }, [token])
 
@@ -33,7 +34,9 @@ function Home() {
                         <Box marginRight={1}>
                             <ModalPostagem />
                         </Box>
-                        <Button variant='outlined' className='botao'>Ver Postagens</Button>
+                        <Link to='/postagens' className='text-decorator-none'>
+                            <Button variant='outlined' className='botao'>Ver Postagens</Button>
+                        </Link>
                     </Box>
                 </Grid>
                 <Grid item xs={6} >
