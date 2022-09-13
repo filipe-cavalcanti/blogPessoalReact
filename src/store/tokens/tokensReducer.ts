@@ -13,6 +13,7 @@ export const tokenReducer = (state: TokenState = initialState, action: Action) =
         case 'ADD_TOKEN': {
             return { tokens: action.payload }
         }
-        default: return state
+        default:
+            return state
     }
 }

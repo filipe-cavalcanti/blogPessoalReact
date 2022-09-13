@@ -5,6 +5,7 @@ import { Button, Grid, TextField, Typography } from '@material-ui/core'
 import { Link, useNavigate } from 'react-router-dom'
 import { cadastroUsuario } from '../../services/Service'
 import User from '../../models/User'
+import { toast } from 'react-toastify'
 
 function CadastroUsuario() {
 
@@ -50,9 +51,28 @@ function CadastroUsuario() {
     e.preventDefault()
     if (confirmarSenha == user.senha && user.senha.length >= 8) {
       cadastroUsuario(`/usuarios/cadastrar`, user, setUserResult)
-      alert('Usuario cadastrado com sucesso')
+      toast.success('Usuário cadastrado com sucesso!', {
+        position: 'top-right',
+        autoClose: 2000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        theme: 'dark',
+        progress: undefined
+      })
     } else {
       alert('Dados inconsistentes. Favor verificar as informações de cadastro.')
+      toast.error('Erro ao cadastrar, verifique as informações de cadastro!', {
+        position: 'top-right',
+        autoClose: 2000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        theme: 'dark',
+        progress: undefined
+    })
       setUser({ ...user, senha: '' })
       setConfirmarSenha('')
     }

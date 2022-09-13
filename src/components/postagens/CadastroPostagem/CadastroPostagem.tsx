@@ -7,6 +7,7 @@ import Postagem from '../../../models/Postagem'
 import { busca, buscaId, post, put } from '../../../services/Service'
 import { useSelector } from 'react-redux'
 import { TokenState } from '../../../store/tokens/tokensReducer'
+import { toast } from 'react-toastify'
 
 function CadastroPostagem() {
 
@@ -19,7 +20,16 @@ function CadastroPostagem() {
 
     useEffect(() => {
         if (token === '') {
-            alert('Você precisa estar logado!')
+            toast.error('Você precisa estar logado!', {
+                position: 'top-right',
+                autoClose: 2000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                theme: 'dark',
+                progress: undefined
+            })
             navigate('/login')
         }
     }, [token])
@@ -33,13 +43,7 @@ function CadastroPostagem() {
         id: 0,
         titulo: '',
         texto: '',
-        tema: null,
-        usuario: {
-            id: 1,
-            nome: '',
-            usuario: '',
-            senha: ''
-        }
+        tema: null
     })
 
     useEffect(() => {
@@ -73,7 +77,6 @@ function CadastroPostagem() {
     }
 
     function updatedPostagem(e: ChangeEvent<HTMLInputElement>) {
-
         setPostagem({
             ...postagem,
             [e.target.name]: e.target.value, tema: tema
@@ -82,21 +85,38 @@ function CadastroPostagem() {
 
     async function onSubmit(e: ChangeEvent<HTMLFormElement>) {
         e.preventDefault()
-
         if (id !== undefined) {
             put(`/postagens`, postagem, setPostagem, {
                 headers: {
                     'Authorization': token
                 }
             })
-            alert('Postagem atualizada com sucesso!');
+            toast.success('Postagem atualizada com sucesso!', {
+                position: 'top-right',
+                autoClose: 2000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                theme: 'dark',
+                progress: undefined
+            })
         } else {
             post(`/postagens`, postagem, setPostagem, {
                 headers: {
                     'Authorization': token
                 }
             })
-            alert('Postagem cadastrada com sucesso!');
+            toast.success('Postagem cadastrada com sucesso!', {
+                position: 'top-right',
+                autoClose: 2000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                theme: 'dark',
+                progress: undefined
+            })
         }
         back()
     }
