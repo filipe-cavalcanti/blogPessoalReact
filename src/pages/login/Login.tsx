@@ -82,7 +82,7 @@ function Login() {
                         <Box marginRight={1}>
                             <Typography variant='subtitle1' gutterBottom align='center'>Não tem uma conta?</Typography>
                         </Box>
-                        <Link to='/cadastro'>
+                        <Link to='/cadastro' className='text-decorator-none'>
                             <Typography variant='subtitle1' gutterBottom align='center' className='textosLogin'>Cadastra-se</Typography>
                         </Link>
                     </Box>

@@ -43,7 +43,14 @@ function CadastroPostagem() {
         id: 0,
         titulo: '',
         texto: '',
-        tema: null
+        tema: null,
+        usuario: {
+            id: 1,
+            nome: '',
+            usuario: '',
+            foto: '',
+            senha: ''
+        }
     })
 
     useEffect(() => {

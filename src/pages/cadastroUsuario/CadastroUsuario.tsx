@@ -96,7 +96,7 @@ function CadastroUsuario() {
                   Cancelar
                 </Button>
               </Link>
-              <Button type='submit' variant='contained' className='botaoCadastroUsuario'>
+              <Button type='submit' variant='contained' className='text-decorator-none'>
                 Cadastrar
               </Button>
             </Box>

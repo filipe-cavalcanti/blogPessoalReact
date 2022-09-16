@@ -7,7 +7,6 @@ import { useDispatch, useSelector } from 'react-redux'
 import { TokenState } from '../../../store/tokens/tokensReducer'
 import { addToken } from '../../../store/tokens/actions'
 import { toast } from 'react-toastify'
-import { dark } from '@material-ui/core/styles/createPalette'
 
 function Navbar() {
 

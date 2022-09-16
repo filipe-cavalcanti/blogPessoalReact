@@ -40,7 +40,7 @@ function Footer() {
                     </Box>
                     <Box>
                         <a target='_blank' href='https://brasil.generation.org' className='text-decorator-none'>
-                            <Typography variant='subtitle2' gutterBottom className='textosFooter' align='center'>brasil.generation.org</Typography>
+                            <Typography variant='subtitle2' gutterBottom className='textosFooter' align='center'>Generation Brasil</Typography>
                         </a>
                     </Box>
                 </Box>
