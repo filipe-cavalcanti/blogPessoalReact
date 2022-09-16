@@ -3,7 +3,7 @@ import './TabPostagem.css'
 import { Box } from '@mui/material'
 import { AppBar, Tab, Tabs, Typography } from '@material-ui/core'
 import { TabContext, TabPanel } from '@material-ui/lab'
-import ListaPostagem from '../listaPostagens/ListaPostagem'
+import ListaPostagem from '../listaPost/ListaPostagem'
 
 function TabPostagem() {
     const [value, setValue] = useState('1')
