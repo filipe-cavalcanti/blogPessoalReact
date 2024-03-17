@@ -1,4 +1,5 @@
 .textosCadastroUsuario {
+    color: #7d1919 !important;
     font-weight: bold !important;
 }
 
@@ -16,5 +17,5 @@
 }
 
 .text-decorator-none {
-    text-decoration: none;
+    text-decoration: none !important;
 }
