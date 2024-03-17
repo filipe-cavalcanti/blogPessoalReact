@@ -92,7 +92,7 @@ function CadastroUsuario() {
             <TextField value={user.foto} onChange={(e: ChangeEvent<HTMLInputElement>) => updatedModel(e)} id='foto' label='url da foto' variant='outlined' name='foto' margin='normal' fullWidth type='url' />
             <Box marginTop={2} textAlign='center'>
               <Link to='/login' className='text-decorator-none'>
-                <Button variant='contained' className='botaoCancelar'>
+                <Button variant='contained' className='botao'>
                   Cancelar
                 </Button>
               </Link>
